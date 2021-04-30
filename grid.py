@@ -23,10 +23,14 @@ class Grid:
         return (i + self.width) % self.width, (j + self.height) % self.height
 
     def diffuse(self):
+        new_g = []
         for i, row in enumerate(self.g):
+            new_row = []
             for j, cell_ in enumerate(row):
                 to_diffuse = [cell_]
                 for di, dj in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
                     actual_i, actual_j = self.get_in_range(i+di, j+dj)
                     to_diffuse.append(self.g[actual_i][actual_j])
-                self.g[i][j] = diffuse(to_diffuse)
+                new_row.append(diffuse(to_diffuse))
+            new_g.append(new_row)
+        self. g = new_g
